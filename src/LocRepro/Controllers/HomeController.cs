@@ -52,36 +52,16 @@ namespace LocRepro.Controllers
 
         public override void OnActionExecuted(ActionExecutedContext context)
         {
-            string lang;
-            var langCookie = Request.Cookies["culture"];
-            if (langCookie != null)
-            {
-                lang = langCookie;
-            }
-            else
-            {
-                lang = "am";
-            }
-            SetLanguage(lang);
+            SetLanguage("am");
             base.OnActionExecuted(context);
         }
 
         private void SetLanguage(string lang)
         {
-            try
-            {
-                var cultureInfo = new CultureInfo(lang);
-                cultureInfo.DateTimeFormat.ShortDatePattern = "dd-MM-yyyy hh:mm:ss";
-                cultureInfo.DateTimeFormat.DateSeparator = "-";
-                Thread.CurrentThread.CurrentUICulture = cultureInfo;
-                Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(cultureInfo.Name);
-                CookieOptions option = new CookieOptions();
-                option.Expires = DateTime.Now.AddYears(10);
-            }
-            catch
-            {
+            var cultureInfo = new CultureInfo(lang);
 
-            }
+            Thread.CurrentThread.CurrentUICulture = cultureInfo;
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(cultureInfo.Name);
         }
     }
 }

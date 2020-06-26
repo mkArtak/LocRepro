@@ -53,7 +53,7 @@ namespace LocRepro
 
             var supportedCultures = new[]
            {
-                new CultureInfo("am-AM"),
+                new CultureInfo("am"),
                 new CultureInfo("en-US")
             };
             app.UseRequestLocalization(new RequestLocalizationOptions
